@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/Armatech.iml" filepath="$PROJECT_DIR$/.idea/Armatech.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Armatech/Armatech.iml" filepath="$PROJECT_DIR$/Armatech/Armatech.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/Armatech_Api.iml" filepath="$PROJECT_DIR$/.idea/Armatech_Api.iml" />
     </modules>
   </component>
 </project>
