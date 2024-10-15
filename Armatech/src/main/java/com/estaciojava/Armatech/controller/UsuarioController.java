@@ -1,22 +1,16 @@
 package com.estaciojava.Armatech.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import com.estaciojava.Armatech.classes.CrudController;
+import com.estaciojava.Armatech.model.Usuario;
+import com.estaciojava.Armatech.service.UsuarioService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/usuarios")
-public class UsuarioController {
+public class UsuarioController extends CrudController<Usuario, Long> {
 
-    @GetMapping
-    public  String listar(){
-        return "deu certo";
+    public UsuarioController(UsuarioService service) {
+        super(service);
     }
-    @GetMapping("/{id}")
-    public  String buscarUm(@PathVariable Integer id){
-
-        return "usuario encontrado" + id;
-    }
-
 }

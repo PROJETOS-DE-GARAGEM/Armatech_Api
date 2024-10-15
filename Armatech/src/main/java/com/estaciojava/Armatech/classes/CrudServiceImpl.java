@@ -1,5 +1,6 @@
 package com.estaciojava.Armatech.classes;
 
+import com.estaciojava.Armatech.repository.UsuarioRepository;
 import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 import java.util.Optional;
@@ -8,13 +9,13 @@ public abstract class CrudServiceImpl<T, ID> implements CrudService<T, ID> {
 
     protected final CrudRepository<T, ID> repository;
 
-    protected CrudServiceImpl(CrudRepository<T, ID> repository) {
-        this.repository = repository;
+    protected CrudServiceImpl(UsuarioRepository repository) {
+        this.repository = (CrudRepository<T, ID>) repository;
     }
 
     @Override
     public T save(T entity) {
-        return repository.save(entity);
+        return entity; //repository.save(entity);
     }
 
     @Override
