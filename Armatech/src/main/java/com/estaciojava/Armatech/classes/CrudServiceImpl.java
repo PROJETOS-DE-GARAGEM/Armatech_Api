@@ -9,13 +9,13 @@ public abstract class CrudServiceImpl<T, ID> implements CrudService<T, ID> {
 
     protected final CrudRepository<T, ID> repository;
 
-    protected CrudServiceImpl(UsuarioRepository repository) {
+    protected CrudServiceImpl(CrudRepository repository) {
         this.repository = (CrudRepository<T, ID>) repository;
     }
 
     @Override
     public T save(T entity) {
-        return entity; //repository.save(entity);
+        return repository.save(entity);
     }
 
     @Override
