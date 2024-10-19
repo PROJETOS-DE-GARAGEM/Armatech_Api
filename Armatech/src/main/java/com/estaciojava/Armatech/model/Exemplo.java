@@ -4,29 +4,21 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Entity
 public class Exemplo {
+
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long id;
-    private  String nome;
+   // @GeneratedValue(strategy = GenerationType.IDENTITY) //conferir uma maneira de poder utilizar isso
+    private Integer id;
 
-        //Getters e Setters
-    public Long getId() {
-        return id;
-    }
+    private String nome;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+    // getters e setters
 
 }

@@ -11,4 +11,11 @@ public class ExemploService extends CrudServiceImpl<Exemplo, Long> {
     public ExemploService(ExemploRepository repository) {
         super(repository);
     }
+
+    @Override
+    public Exemplo save(Exemplo entity) {
+        System.out.println(entity.getId());
+        System.out.println( entity.getNome());
+        return super.save(entity);
+    }
 }
