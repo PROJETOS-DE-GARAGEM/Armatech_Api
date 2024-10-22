@@ -3,6 +3,7 @@ package com.estaciojava.Armatech.controller;
 import com.estaciojava.Armatech.classes.CrudController;
 import com.estaciojava.Armatech.model.Usuario;
 import com.estaciojava.Armatech.service.UsuarioService;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
