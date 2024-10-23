@@ -24,7 +24,7 @@ public class Lancamento {
     private Integer quantidade;
 
     // Referência à entidade Produto OBS: Preciso de Produtos feito para que tenha essa relação
-    @JoinColumn(name = "idProduto", referencedColumnName = "id") //Somente para explicitar que a PK é 'idProduto'
+    @JoinColumn(name = "idProduto", referencedColumnName = "id") //Somente para explicitar que a FK é 'idProduto'
     @ManyToOne // Estabelece que vários lançamentos podem referenciar um único produto
     private Produto produto;
 
