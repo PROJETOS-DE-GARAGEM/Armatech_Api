@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 
@@ -27,11 +26,10 @@ public class TokenService {
 
             //Cria um token JWT com o emissor, o e-mail do usuário e a data de expiração
             String token = JWT.create()
-
-                    .withIssuer("login-auth-api")//Define o emissor do token (identifica quem gerou o token)
-                    .withSubject(usuario.getEmail()) //Define o "subject" do token, que neste caso é o email do usuário
-                    .withExpiresAt(this.generateExpirationDate()) //Define a data de expiração do token (chama método para gerar a data)
-                    .sign(algorithm); //Assina o token usando o algoritmo HMAC256 e reotna o token como uma string
+                    .withIssuer("Armatech")
+                    .withSubject(usuario.getEmail())
+                    .withExpiresAt(this.generateExpirationDate())
+                    .sign(algorithm);
             return token;// Retorna o token gerado
         } catch (JWTCreationException exception){
             //Se houver algum erro na criação do token, lança uma exceção personalizada
@@ -40,16 +38,16 @@ public class TokenService {
     }
 
     //Método responsável por validar um token JWT e retornar o "Subject" (e-mail do usuário) se o token for válido
-    private String validateToken(String token){
+    public String validateToken(String token){
         try{
             // Cria o algoritmo HMAC256 novamente para verificar o token (usando a chave secreta)
             Algorithm algorithm = Algorithm.HMAC256(secret);
             // Valida o token e retorna o "subject" (e-mail do usuário) se o token for válido
-            return JWT.require(algorithm)// Define que o algoritmo HMAC256 será usado para validar o token
-                    .withIssuer("login-auth-api") // Garante que o token tenha sido emitido pelo "login-auth-api"
-                    .build()// Constrói o verificador do JWT
-                    .verify(token) // Verifica o token passado como parâmetro
-                    .getSubject(); // Retorna o "subject" (que é o e-mail do usuário)
+            return JWT.require(algorithm)
+                    .withIssuer("Armatech")
+                    .build()
+                    .verify(token)
+                    .getSubject();
 
         } catch(JWTVerificationException exception){
             // Se houver algum erro na verificação (como token inválido ou expirado), retorna null
