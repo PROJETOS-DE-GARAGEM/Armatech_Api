@@ -14,8 +14,8 @@ public class ExemploService extends CrudServiceImpl<Exemplo, Long> {
 
     @Override
     public Exemplo save(Exemplo entity) {
-        System.out.println(entity.getId());
-        System.out.println( entity.getNome());
+        System.out.println(entity.());
+        System.out.println( entity.());
         return super.save(entity);
     }
 }

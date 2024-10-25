@@ -12,4 +12,12 @@ public class LancamentoService extends CrudServiceImpl<Lancamento, Long> {
     public LancamentoService(LancamentoRepository repository) {
         super(repository);
     }
+
+    @Override
+    public Lancamento save(Lancamento entity) {
+        System.out.println(entity.getId());
+        System.out.println( entity.getDataEntrada());
+        System.out.println( entity.getDataSaida());
+        return super.save(entity);
+    }
 }
