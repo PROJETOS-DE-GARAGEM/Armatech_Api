@@ -9,9 +9,9 @@ public class CorsConfig implements WebMvcConfigurer {
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**")
-                .allowedOrigins("http://192.168.18.14:8081")
-                .allowedMethods("GET", "POST")
+        registry.addMapping("/**")// Permite cors para todas as rotas
+                .allowedOrigins("http://192.168.18.14:8081")//Permite requisições de um domínio especifico(forntend)
+                .allowedMethods("GET", "POST")//Métodos http permitido
                 .allowedHeaders("*")
                 .allowCredentials(true);
     }
