@@ -9,11 +9,11 @@ import jakarta.persistence.Id;
 public class Produto {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private String Id;
     private String nome;
     private String descricao;
-    private Float preco;
+    private Double preco;
     private Integer tipo;
     private Integer quantidade;
 }
@@ -27,57 +27,57 @@ public class Produto {
 //Getters e Setters
 
 //          Getter
-//       Public Long getId(){
+//       Public String getId(){
 //         return id;
 //       }
 
 //          Setter
-//       Public void seId(Long Id){
+//       Public void setId(String Id){
 //         this.id = id;
 //       }
 
 //          Getter
-//       Public Long getNome(){
+//       Public String getNome(){
 //         return nome;
 //       }
 
 //          Setter
-//       Public void seNome(String nome){
+//       Public void setNome(String nome){
 //         this.nome = nome;
 //       }
 
 //          Getter
-//       Public Long getDescricao(){
+//       Public String getDescricao(){
 //         return descricao;
 //       }
 
 //          Setter
-//       Public void seDescricao(String descricao){
+//       Public void setDescricao(String descricao){
 //         this.descricao = descricao;
 //       }
 
 //          Getter
-//       Public Long getPreco(){
+//       Public Double getPreco(){
 //         return preco;
 //       }
 
 //          Setter
-//       Public void sePreco(Flot preco){
+//       Public void setPreco(Flot preco){
 //         this.preco = preco;
 //       }
 
 //          Getter
-//       Public Long getTipo(){
+//       Public Integer getTipo(){
 //         return tipo;
 //       }
 
 //          Setter
-//       Public void seTipo(Interger tipo){
+//       Public void setTipo(Interger tipo){
 //         this.tipo = tipo;
 //       }
 
 //          Getter
-//       Public Long getQuantidade(){
+//       Public Interger getQuantidade(){
 //         return quantidade;
 //       }
 
