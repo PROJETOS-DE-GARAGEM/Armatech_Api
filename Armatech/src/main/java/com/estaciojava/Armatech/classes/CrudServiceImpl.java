@@ -20,11 +20,9 @@ public abstract class CrudServiceImpl<T, DTO, F, ID> implements CrudService<T, D
     }
 
     public void saveValidate(T entity) {
-        return;
     }
 
     public void saveAfter(T entity) {
-        return;
     }
 
     @Override

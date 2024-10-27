@@ -18,7 +18,7 @@ public class ExemploService extends CrudServiceImpl<Exemplo,Exemplo, ExemploFilt
 
 
     private final JpaSpecificationExecutor<Exemplo> repositorySpecification;
-    private  ExemploSpecification specificationClass;
+    private final ExemploSpecification specificationClass;
     public ExemploService(
             ExemploRepository repository,
             JpaSpecificationExecutor<Exemplo> specificRepository,
@@ -50,13 +50,4 @@ public class ExemploService extends CrudServiceImpl<Exemplo,Exemplo, ExemploFilt
             throw new RuntimeException(e);
         }
     }
-
-
-    //
-    //     public List<DTO> findFilter(F filter) {
-    //        List<DTO> filteredEntities;
-    //        return filteredEntities;
-    //    }
-    //
-    //
 }
