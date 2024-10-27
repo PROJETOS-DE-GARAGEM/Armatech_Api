@@ -1,4 +1,5 @@
 package com.estaciojava.Armatech.classes;
 
-public class BaseModel {
+public class ExampleFilter {
+  String  nome;
 }
