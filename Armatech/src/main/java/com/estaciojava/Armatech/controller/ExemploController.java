@@ -1,5 +1,5 @@
 package com.estaciojava.Armatech.controller;
-
+/*
 import com.estaciojava.Armatech.classes.CrudController;
 import com.estaciojava.Armatech.model.Exemplo;
 import com.estaciojava.Armatech.service.ExemploService;
@@ -13,4 +13,4 @@ public class ExemploController extends CrudController<Exemplo, Long> {
     public ExemploController(ExemploService service) {
         super(service);
     }
-}
+}*/

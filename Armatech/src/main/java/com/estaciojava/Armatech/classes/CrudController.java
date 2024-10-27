@@ -1,43 +1,48 @@
 package com.estaciojava.Armatech.classes;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+//Biblioteca com de array de lista
+import java.util.Optional;
+//Biblioteca de validar se é vazio ou não
 
-public abstract class CrudController<T, ID> {
+public abstract class  CrudController<T, ID> {
 
     protected final CrudService<T, ID> service;
 
-    protected CrudController(CrudService<T, ID> service) {
+    // Injeção de dependências via construtor
+    public CrudController(CrudService<T, ID> service) {
         this.service = service;
     }
 
-    @PostMapping
-    public ResponseEntity<T> cadastrar(@RequestBody T entity) {
-        return ResponseEntity.ok(service.save(entity));
-    }
-
     @GetMapping
-    public ResponseEntity<List<T>> buscarTodos() {
-        return ResponseEntity.ok(service.findAll());
+    public List<T> findAll() {
+        return service.findAll();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<T> buscarUm(@PathVariable ID id) {
-        return service.findById(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    public T findById(@PathVariable ID id) {
+        return service.findById(id).orElse(null);
+    }
+
+    @PostMapping
+    public String create(@RequestBody T entity) {
+        T savedEntity = service.save(entity);
+        return "Item Cadastrado com Sucesso";
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<T> atualizar(@PathVariable ID id, @RequestBody T entity) {
-        return ResponseEntity.ok(service.update(id, entity));
+    public String update(@PathVariable ID id, @RequestBody T entity) {
+        Optional<T> updatedEntity = service.update(id, entity);
+        return "Atualizado com sucesso";
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletar(@PathVariable ID id) {
-        service.delete(id);
-        return ResponseEntity.noContent().build();
+    public String delete(@PathVariable ID id) {
+        boolean deleted = service.delete(id);
+        return "Deletado";
     }
+
 }

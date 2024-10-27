@@ -1,4 +1,4 @@
-package com.estaciojava.Armatech.Classes;
+package com.estaciojava.Armatech.classes;
 
 public class CrudRepository {
 }
