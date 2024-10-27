@@ -7,7 +7,7 @@ import com.estaciojava.Armatech.repository.UsuarioRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UsuarioService extends CrudServiceImpl<Usuario, Long> {
+public class UsuarioService extends CrudServiceImpl<Usuario, String> {
 
     public UsuarioService(UsuarioRepository repository) {
         super(repository);

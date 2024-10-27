@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/usuarios")
-public class UsuarioController extends CrudController<Usuario, Long> {
+public class UsuarioController extends CrudController<Usuario, String> {
 
     public UsuarioController(UsuarioService service) {
         super(service);
