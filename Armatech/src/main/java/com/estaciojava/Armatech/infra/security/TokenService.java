@@ -57,6 +57,7 @@ public class TokenService {
     }
     //Método resposável por gerar a data de expiração do token ( 2 horas após o momento atual)
     private Instant generateExpirationDate() {
+
         // Obtém o horário atual, adiciona 2 horas e converte para um Instant com o fuso horário "-03:00" (Horário de Brasília, por exemplo)
         return LocalDateTime.now().plusHours(2).toInstant(ZoneOffset.of("-03:00"));
     }
