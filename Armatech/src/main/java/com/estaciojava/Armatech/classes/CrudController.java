@@ -1,4 +1,4 @@
-package com.estaciojava.Armatech.Classes;
+package com.estaciojava.Armatech.classes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
