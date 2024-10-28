@@ -1,4 +1,4 @@
-package com.estaciojava.Armatech.service;
+/*package com.estaciojava.Armatech.service;
 
 import com.estaciojava.Armatech.classes.CrudServiceImpl;
 import com.estaciojava.Armatech.model.Exemplo;
@@ -8,14 +8,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class ExemploService extends CrudServiceImpl<Exemplo, Long> {
 
-    public ExemploService(ExemploRepository repository) {
-        super(repository);
-    }
+   public ExemploService(ExemploRepository repository) {
+       super(repository);
+   }
 
-    @Override
-    public Exemplo save(Exemplo entity) {
-        System.out.println(entity.getId());
-        System.out.println( entity.getNome());
-        return super.save(entity);
-    }
+   @Override
+   public Exemplo save(Exemplo entity) {
+       System.out.println(entity.());
+       System.out.println( entity.());
+       return super.save(entity);
+   }
 }
+*/
