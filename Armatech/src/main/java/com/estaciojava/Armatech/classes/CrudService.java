@@ -1,4 +1,4 @@
-package com.estaciojava.Armatech.classes;
+package com.estaciojava.Armatech.Classes;
 import java.util.List;
 import java.util.Optional;
 
@@ -10,7 +10,7 @@ public interface CrudService<T, ID> {
 
     T save(T entity);
 
-    T update(ID id, T entity);
+    Optional<T> update(ID id, T entity);
 
-    void delete(ID id);
+    boolean delete(ID id);
 }
