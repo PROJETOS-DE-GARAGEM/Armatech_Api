@@ -1,16 +1,17 @@
-package com.estaciojava.Armatech.Classes;
+package com.estaciojava.Armatech.classes;
+
 import java.util.List;
 import java.util.Optional;
 
 public interface CrudService<T, ID> {
 
-    List<T> findAll();
+    T save(T entity); // Método para salvar a entidade
 
-    Optional<T> findById(ID id);
+    List<T> findAll(); // Método para buscar todas as entidades
 
-    T save(T entity);
+    Optional<T> findById(ID id); // Método para buscar uma entidade pelo ID
 
-    Optional<T> update(ID id, T entity);
+    T update(ID id, T entity); // Método para atualizar uma entidade
 
-    boolean delete(ID id);
+    void delete(ID id); // Método para deletar uma entidade pelo ID
 }
