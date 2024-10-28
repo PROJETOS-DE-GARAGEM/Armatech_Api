@@ -1,6 +1,4 @@
 package com.estaciojava.Armatech.classes;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -35,13 +33,13 @@ public abstract class  CrudController<T, ID> {
 
     @PutMapping("/{id}")
     public String update(@PathVariable ID id, @RequestBody T entity) {
-        Optional<T> updatedEntity = service.update(id, entity);
+        T updatedEntity = service.update(id, entity);
         return "Atualizado com sucesso";
     }
 
     @DeleteMapping("/{id}")
     public String delete(@PathVariable ID id) {
-        boolean deleted = service.delete(id);
+        service.delete(id);
         return "Deletado";
     }
 

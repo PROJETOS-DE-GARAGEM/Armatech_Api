@@ -10,7 +10,7 @@ public interface CrudService<T, ID> {
 
     T save(T entity);
 
-    Optional<T> update(ID id, T entity);
+    T update(ID id, T entity);
 
-    boolean delete(ID id);
+    void delete(ID id);
 }
