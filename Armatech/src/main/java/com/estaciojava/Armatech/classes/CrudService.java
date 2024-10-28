@@ -1,4 +1,4 @@
-package com.estaciojava.Armatech.classes;
+package com.estaciojava.Armatech.Classes;
 import java.util.List;
 import java.util.Optional;
 
