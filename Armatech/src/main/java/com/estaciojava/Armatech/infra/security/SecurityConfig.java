@@ -24,6 +24,7 @@ public class SecurityConfig {
     @Autowired
     SecurityFilter securityFilter;
 
+    //Garante que apenas usuarios autenticados possam acessar os endpoints da aplicação, exceto os de login e registro
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http

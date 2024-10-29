@@ -18,6 +18,9 @@ import java.util.Collections;
 
 @Component
 // Filtro que irá esecutar apenas uma vez para cada request que chegar na API
+//Faz a autenticação do Usuario verificando se o token que o usuario mandou foi a mesma que a aplicação emitiu
+//Para verificar se o usuario ele pode ou não fazer request
+
 public class SecurityFilter extends OncePerRequestFilter {
     @Autowired
     TokenService tokenService;
