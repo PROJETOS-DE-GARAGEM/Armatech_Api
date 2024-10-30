@@ -1,30 +1,28 @@
 package com.estaciojava.Armatech.classes;
 
-import com.estaciojava.Armatech.repository.UsuarioRepository;
-import jakarta.persistence.Id;
+
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 import java.util.Optional;
 
-public abstract class CrudServiceImpl<T, ID> implements CrudService<T, ID> {
+public abstract class CrudServiceImpl<T, DTO, F, ID> implements CrudService<T, DTO, F, ID> {
 
-    protected final CrudRepository<T, ID> repository;
+    public final CrudRepository<T, ID> repository;
 
-    protected CrudServiceImpl(CrudRepository repository) {
-        this.repository = (CrudRepository<T, ID>) repository;
+    protected CrudServiceImpl(CrudRepository<T, ID> repository) {
+        this.repository = repository;
     }
+
 
     public T saveBefore(T entity) {
         return entity;
     }
 
     public void saveValidate(T entity) {
-        return;
     }
 
     public void saveAfter(T entity) {
-        return;
     }
 
     @Override
@@ -40,29 +38,32 @@ public abstract class CrudServiceImpl<T, ID> implements CrudService<T, ID> {
         }
     }
 
-    public List<T> findAllFormat(List<T> entities) {
-        return entities;
+    public List<DTO> findAllFormat(List<T> entities) {
+        List<DTO> formatedEntities = (List<DTO>) entities;
+        return formatedEntities;
     }
 
 
     @Override
-    public List<T> findAll() {
+    public List<DTO> findAll(F filter) {
         try {
-            List<T> entities = (List<T>) repository.findAll();
-            entities = this.findAllFormat(entities);
 
-            return entities;
+            List<T> entities = (List<T>) repository.findAll();
+
+            return this.findAllFormat(entities);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
-    Optional<T> findByIdFormat(Optional<T> entity) {
-        return entity;
+
+    Optional<DTO> findByIdFormat(Optional<T> entity) {
+        Optional<DTO> newEntity = (Optional<DTO>) entity;
+        return newEntity;
     }
 
     @Override
-    public Optional<T> findById(ID id) {
+    public Optional<DTO> findById(ID id) {
         try {
             Optional<T> entity = repository.findById(id);
             return this.findByIdFormat(entity);

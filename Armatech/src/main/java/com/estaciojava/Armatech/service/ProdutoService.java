@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 
 @Service
-public class ProdutoService extends CrudServiceImpl<Produto, String> {
+public class ProdutoService extends CrudServiceImpl<Produto , Produto , Produto, String> {
 
     public ProdutoService(ProdutoRepository repository) { super(repository); }
     

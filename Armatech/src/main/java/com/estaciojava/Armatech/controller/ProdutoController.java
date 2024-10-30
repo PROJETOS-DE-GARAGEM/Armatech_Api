@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/produtos")
-public class ProdutoController extends CrudController<Produto, String> {
+public class ProdutoController extends CrudController<Produto, Produto ,Produto, String> {
 
     public ProdutoController(ProdutoService service) {
         super(service);

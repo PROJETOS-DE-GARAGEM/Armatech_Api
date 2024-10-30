@@ -2,14 +2,17 @@ package com.estaciojava.Armatech.classes;
 
 import java.util.List;
 import java.util.Optional;
-
-public interface CrudService<T, ID> {
+//T tipo do model
+//DTO tipo de DTO
+//F tipo de Fitro
+//ID tipo do id
+public interface CrudService<T, DTO ,F, ID> {
 
     T save(T entity); // Método para salvar a entidade
 
-    List<T> findAll(); // Método para buscar todas as entidades
+    List<DTO> findAll(F filter); // Método para buscar todas as entidades
 
-    Optional<T> findById(ID id); // Método para buscar uma entidade pelo ID
+    Optional<DTO> findById(ID id); // Método para buscar uma entidade pelo ID
 
     T update(ID id, T entity); // Método para atualizar uma entidade
 

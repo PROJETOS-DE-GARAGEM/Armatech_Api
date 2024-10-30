@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/lancamento")
-public class LancamentoController extends CrudController<Lancamento, Long> {
+public class LancamentoController extends CrudController<Lancamento,Lancamento ,Lancamento, Long> {
 
     public LancamentoController(LancamentoService service) {
         super(service);

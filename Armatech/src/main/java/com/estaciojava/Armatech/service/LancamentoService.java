@@ -7,7 +7,7 @@ import com.estaciojava.Armatech.repository.LancamentoRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class LancamentoService extends CrudServiceImpl<Lancamento, Long> {
+public class LancamentoService extends CrudServiceImpl<Lancamento , Lancamento , Lancamento, String> {
 
     public LancamentoService(LancamentoRepository repository) {
         super(repository);
