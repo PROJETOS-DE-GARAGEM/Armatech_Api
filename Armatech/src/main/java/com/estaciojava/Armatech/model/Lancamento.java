@@ -19,7 +19,7 @@ public class Lancamento {
 
   //  private String idProduto;
 
-    private enum TipoLancamento{
+    public enum TipoLancamento{
         ENTRADA,
         SAIDA
     };
