@@ -17,9 +17,27 @@ public class Produto {
     private String Id;
     private String nome;
     private String descricao;
-    private Double preco;
-    private Integer tipo;
     private Integer quantidade;
+    private Double preco;
+
+    //Campo que recebe o dado de Enum
+    private TipoTamanho tipo;
+
+    private enum TipoTamanho {
+        LETRA(1),
+        NUMERICO(2);
+
+        private final int tipo;
+
+        //Construtor Enum
+        TipoTamanho(int tipo) {
+            this.tipo = tipo;
+        }
+
+        public int getTipo(){
+            return tipo;
+        }
+    }
 }
 
 //@Entity indica que a classe "Produto" é mapeada como uma entidade para que o JPA faça a associação a uma tabela do BD.
@@ -68,16 +86,6 @@ public class Produto {
 //          Setter
 //       Public void setPreco(Flot preco){
 //         this.preco = preco;
-//       }
-
-//          Getter
-//       Public Integer getTipo(){
-//         return tipo;
-//       }
-
-//          Setter
-//       Public void setTipo(Interger tipo){
-//         this.tipo = tipo;
 //       }
 
 //          Getter
