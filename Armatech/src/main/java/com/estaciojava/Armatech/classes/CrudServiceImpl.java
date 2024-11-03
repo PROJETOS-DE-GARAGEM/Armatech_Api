@@ -5,6 +5,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 import java.util.Optional;
+import java.lang.reflect.Field;
 
 public abstract class CrudServiceImpl<T, DTO, F, ID> implements CrudService<T, DTO, F, ID> {
 
@@ -87,20 +88,53 @@ public abstract class CrudServiceImpl<T, DTO, F, ID> implements CrudService<T, D
     @Override
     public T update(ID id, T entity) {
         try {
-            if (repository.existsById(id)) {
-                this.updateValidate(entity);
-                entity = this.updateBefore(entity);
+            // Busca a entidade existente no banco de dados usando o id
+            T existingEntity = repository.findById(id)
+                    .orElseThrow(() -> new RuntimeException("Entidade não encontrada"));
 
-                repository.save(entity);
-                this.updateAfter(entity);
-                return entity;
-            } else {
-                throw new RuntimeException("Entidade não encontrada");
+            // Valida a entidade antes da atualização
+            this.updateValidate(entity);
+
+            // Atualiza os campos necessários na existingEntity com os valores de entity
+            for (Field field : entity.getClass().getDeclaredFields()) {
+                field.setAccessible(true); // Permite acesso a campos privados
+                Object newValue = field.get(entity); // Obtém o valor do campo da nova entidade
+                if (newValue != null) {
+                    field.set(existingEntity, newValue); // Define o valor na entidade existente
+                }
             }
+
+            // Executa operações antes da atualização, se necessário
+            existingEntity = this.updateBefore(existingEntity);
+
+            // Salva a entidade existente atualizada
+            T updatedEntity = repository.save(existingEntity);
+
+            // Executa operações após a atualização, se necessário
+            this.updateAfter(updatedEntity);
+
+            return updatedEntity;
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Erro ao atualizar a entidade", e);
         }
     }
+//    @Override
+//    public T update(ID id, T entity) {
+//        try {
+//            if (repository.existsById(id)) {
+//                this.updateValidate(entity);
+//                entity = this.updateBefore(entity);
+//
+//                repository.save(entity);
+//                this.updateAfter(entity);
+//                return entity;
+//            } else {
+//                throw new RuntimeException("Entidade não encontrada");
+//            }
+//        } catch (Exception e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
 
     public void deleteBefore(ID id) {
         return;

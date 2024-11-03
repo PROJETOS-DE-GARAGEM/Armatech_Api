@@ -11,7 +11,7 @@ public class CorsConfig implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")// Permite cors para todas as rotas
                 .allowedOrigins("http://172.20.10.2:8081")//Permite requisições de um domínio especifico(forntend)
-                .allowedMethods("GET", "POST")//Métodos http permitido
+                .allowedMethods("GET", "POST", "PUT", "DELETE")//Métodos http permitido
                 .allowedHeaders("*")
                 .allowCredentials(true);
     }
