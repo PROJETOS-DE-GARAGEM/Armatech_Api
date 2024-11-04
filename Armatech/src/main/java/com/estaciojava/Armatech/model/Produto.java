@@ -6,6 +6,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
+import java.util.List;
+import jakarta.persistence.*;
 
 @Getter
 @Setter
@@ -14,86 +16,56 @@ public class Produto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private String Id;
+    private String id;
     private String nome;
     private String descricao;
     private Integer quantidade;
+    private String tamanho;
     private Double preco;
-
-    //Campo que recebe o dado de Enum
     private TipoTamanho tipo;
 
-    private enum TipoTamanho {
+    public enum TipoTamanho {
+    //No POST de cadastro de produto o enum só está reconhecendo os tipos LETRA e NUMERICO como "0" e "1".
+    //O valor de tipo não está passando para a tabela de lançamento corretamento, mesmo selecionado o tipo "1", ele só registra
+        //tipo "0" no lançamento.
         LETRA(1),
         NUMERICO(2);
 
         private final int tipo;
-
-        //Construtor Enum
+        //Construtor enum tipo
         TipoTamanho(int tipo) {
             this.tipo = tipo;
         }
 
-        public int getTipo(){
+        public int getTipo() {
             return tipo;
         }
     }
+
+    private enum OpcoesTamanhos {
+        //LETRA
+        PP("PP"),
+        P("P"),
+        M("M"),
+        G("G"),
+        GG("GG"),
+
+        //NUMERICO
+        TAM36_38("36/38"),
+        TAM38_40("38/40"),
+        TAM40_42("40/42"),
+        TAM42_44("42/44"),
+        TAM44_46("44/46");
+
+        private final String tamanho;
+        //Construtor enum tamanho
+        OpcoesTamanhos(String tamanho) { this.tamanho = tamanho; }
+    }
+
+    //Referência o relacionamento da entidade Produto á entidade Lançamento
+    //Toda lista de Lançamento associada ao idProduto será deletada ao excluír o produto.
+    @OneToMany(mappedBy = "produto", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<Lancamento> lancamento;
 }
 
-//@Entity indica que a classe "Produto" é mapeada como uma entidade para que o JPA faça a associação a uma tabela do BD.
 
-//Indicam que o campo id será a chave primária gerada automaticamente.
-//@Id
-//@GeneratedValue(strategy = GenerationType.IDENTITY)
-
-//Getters e Setters
-
-//          Getter
-//       Public String getId(){
-//         return id;
-//       }
-
-//          Setter
-//       Public void setId(String Id){
-//         this.id = id;
-//       }
-
-//          Getter
-//       Public String getNome(){
-//         return nome;
-//       }
-
-//          Setter
-//       Public void setNome(String nome){
-//         this.nome = nome;
-//       }
-
-//          Getter
-//       Public String getDescricao(){
-//         return descricao;
-//       }
-
-//          Setter
-//       Public void setDescricao(String descricao){
-//         this.descricao = descricao;
-//       }
-
-//          Getter
-//       Public Double getPreco(){
-//         return preco;
-//       }
-
-//          Setter
-//       Public void setPreco(Flot preco){
-//         this.preco = preco;
-//       }
-
-//          Getter
-//       Public Interger getQuantidade(){
-//         return quantidade;
-//       }
-
-//          Setter
-//       Public void setQuantidade(Interger quantidade){
-//         this.quantidade = quantidade;
-//       }
