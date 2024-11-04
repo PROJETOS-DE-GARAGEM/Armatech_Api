@@ -15,11 +15,6 @@ public class LancamentoService extends CrudServiceImpl<Lancamento , Lancamento ,
 
     @Override
     public Lancamento save(Lancamento entity) {
-        System.out.println(entity.getId());
-        System.out.println( entity.getTipo());
-        System.out.println( entity.getQuantidade());
-        System.out.println( entity.getDataEntrada());
-        System.out.println( entity.getDataSaida());
         return super.save(entity);
     }
 }

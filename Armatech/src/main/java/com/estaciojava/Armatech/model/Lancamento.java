@@ -8,22 +8,31 @@ import java.sql.Timestamp;
 @Getter
 @Setter
 @Entity
-@Table (name = "lancamento")
-
+@Table(name = "lancamento")
 public class Lancamento {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID) // UUID é representado como uma string de 36 caracteres
-
     private String id;
 
-  //  private String idProduto;
+    public enum TipoLancamento {
+        ENTRADA(1),
+        SAIDA(2);
 
-    public enum TipoLancamento{
-        ENTRADA,
-        SAIDA
-    };
+        private final int tipo;
 
+        // Construtor do Enum
+        TipoLancamento(int tipo) {
+            this.tipo = tipo;
+        }
+
+        public int getTipo() {
+            return tipo;
+        }
+    }
+
+    // Propriedade para armazenar o tipo do lançamento
+    @Enumerated(EnumType.STRING) // Armazena como String no banco
     private TipoLancamento tipo;
 
     private double quantidade;
@@ -32,18 +41,36 @@ public class Lancamento {
     private Timestamp dataSaida;
 
     // Referência à entidade Produto OBS: Preciso de Produtos feito para que tenha essa relação
-    @JoinColumn(name = "idProduto", referencedColumnName = "id") //Somente para explicitar que a FK é 'idProduto'
+    @JoinColumn(name = "idProduto", referencedColumnName = "id") // Explicita que a FK é 'idProduto'
     @ManyToOne // Estabelece que vários lançamentos podem referenciar um único produto
     private Produto produto;
 
+    // Metodo auxiliar para criar um lançamento de entrada
+    public static Lancamento criarEntrada(Produto produto, double quantidade, Timestamp dataEntrada) {
+        Lancamento lancamento = new Lancamento();
+        lancamento.produto = produto;
+        lancamento.quantidade = quantidade;
+        lancamento.dataEntrada = dataEntrada;
+        lancamento.tipo = TipoLancamento.ENTRADA;
+        return lancamento;
+    }
 
+    // Metodo auxiliar para criar um lançamento de saída
+    public static Lancamento criarSaida(Produto produto, double quantidade, Timestamp dataSaida) {
+        Lancamento lancamento = new Lancamento();
+        lancamento.produto = produto;
+        lancamento.quantidade = quantidade;
+        lancamento.dataSaida = dataSaida;
+        lancamento.tipo = TipoLancamento.SAIDA; // Define automaticamente como SAIDA
+        return lancamento;
+    }
 
-    /*Só para visualizar melhor como está no banco
+    /* Só para visualizar melhor como está no banco:
 
     create table lancamento(
         id varchar(36) primary key,
         idProduto varchar(36),
-        tipo int,
+        tipo varchar(20), -- armazena como string (ENTRADA/SAIDA)
         quantidade decimal,
         dataEntrada timestamp,
         dataSaida timestamp,
