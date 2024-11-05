@@ -1,6 +1,7 @@
 package com.estaciojava.Armatech.classes;
 
 
+import com.estaciojava.Armatech.model.Lancamento;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
@@ -23,7 +24,8 @@ public abstract class CrudServiceImpl<T, DTO, F, ID> implements CrudService<T, D
     public void saveValidate(T entity) {
     }
 
-    public void saveAfter(T entity) {
+    public Lancamento saveAfter(T entity) {
+        return null;
     }
 
     @Override

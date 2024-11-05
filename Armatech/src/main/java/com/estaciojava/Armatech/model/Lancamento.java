@@ -16,8 +16,8 @@ public class Lancamento {
     private String id;
 
     public enum TipoLancamento {
-        ENTRADA(1),
-        SAIDA(2);
+        ENTRADA(0),
+        SAIDA(1);
 
         private final int tipo;
 
@@ -44,26 +44,6 @@ public class Lancamento {
     @JoinColumn(name = "idProduto", referencedColumnName = "id") // Explicita que a FK é 'idProduto'
     @ManyToOne // Estabelece que vários lançamentos podem referenciar um único produto
     private Produto produto;
-
-    // Metodo auxiliar para criar um lançamento de entrada
-    public static Lancamento criarEntrada(Produto produto, double quantidade, Timestamp dataEntrada) {
-        Lancamento lancamento = new Lancamento();
-        lancamento.produto = produto;
-        lancamento.quantidade = quantidade;
-        lancamento.dataEntrada = dataEntrada;
-        lancamento.tipo = TipoLancamento.ENTRADA;
-        return lancamento;
-    }
-
-    // Metodo auxiliar para criar um lançamento de saída
-    public static Lancamento criarSaida(Produto produto, double quantidade, Timestamp dataSaida) {
-        Lancamento lancamento = new Lancamento();
-        lancamento.produto = produto;
-        lancamento.quantidade = quantidade;
-        lancamento.dataSaida = dataSaida;
-        lancamento.tipo = TipoLancamento.SAIDA; // Define automaticamente como SAIDA
-        return lancamento;
-    }
 
     /* Só para visualizar melhor como está no banco:
 
