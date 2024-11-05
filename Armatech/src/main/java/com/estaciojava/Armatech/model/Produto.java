@@ -1,5 +1,6 @@
 package com.estaciojava.Armatech.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -25,11 +26,8 @@ public class Produto {
     private TipoTamanho tipo;
 
     public enum TipoTamanho {
-    //No POST de cadastro de produto o enum só está reconhecendo os tipos LETRA e NUMERICO como "0" e "1".
-    //O valor de tipo não está passando para a tabela de lançamento corretamento, mesmo selecionado o tipo "1", ele só registra
-        //tipo "0" no lançamento.
-        LETRA(1),
-        NUMERICO(2);
+        LETRA(0), //Representa no BD o tipo "0" que é os tamanhos identificado por "LETRA"
+        NUMERICO(1); //Representa no BD o tipo "1" que é os tamanhos identificado por "NUMERICO"
 
         private final int tipo;
         //Construtor enum tipo
@@ -43,14 +41,14 @@ public class Produto {
     }
 
     private enum OpcoesTamanhos {
-        //LETRA
+        //LETRA(0)
         PP("PP"),
         P("P"),
         M("M"),
         G("G"),
         GG("GG"),
 
-        //NUMERICO
+        //NUMERICO(1)
         TAM36_38("36/38"),
         TAM38_40("38/40"),
         TAM40_42("40/42"),
@@ -64,7 +62,9 @@ public class Produto {
 
     //Referência o relacionamento da entidade Produto á entidade Lançamento
     //Toda lista de Lançamento associada ao idProduto será deletada ao excluír o produto.
-    @OneToMany(mappedBy = "produto", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    //FetchTypeLazy ele ajuda para que não seja carregado automaticamente os dados do lançamento quando um Produto for buscado.
+    @OneToMany(mappedBy = "produto", cascade = CascadeType.REMOVE, orphanRemoval = true, fetch = FetchType.LAZY)
+    @JsonIgnore //Faz com que no metodo "GET" não seja necessário carregar também os dados do lançamento.
     private List<Lancamento> lancamento;
 }
 
