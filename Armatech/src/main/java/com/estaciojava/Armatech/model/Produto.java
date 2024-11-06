@@ -20,7 +20,7 @@ public class Produto {
     private String id;
     private String nome;
     private String descricao;
-    private Integer quantidade;
+    private Double quantidade;
     private String tamanho;
     private Double preco;
     private TipoTamanho tipo;

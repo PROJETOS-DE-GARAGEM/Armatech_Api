@@ -22,7 +22,7 @@ public class ProdutoService extends CrudServiceImpl<Produto , Produto , Produto,
 
     //Sobrescrevendo o metodo da super-classe CrudService.
     @Override
-    public void saveAfter(Produto produto) {
+    public Lancamento saveAfter(Produto produto) {
 
         //Intânciando lançamento para receber os dados do registro ao cadastrar um produto
         Lancamento lancamento = new Lancamento();
@@ -44,5 +44,6 @@ public class ProdutoService extends CrudServiceImpl<Produto , Produto , Produto,
 
         lancamentoRepository.save(lancamento);
 
+        return lancamento;
     }
 }
