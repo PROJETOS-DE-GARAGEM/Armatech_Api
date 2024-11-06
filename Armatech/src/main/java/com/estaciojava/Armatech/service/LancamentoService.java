@@ -7,9 +7,12 @@ import com.estaciojava.Armatech.model.Produto;
 import com.estaciojava.Armatech.repository.LancamentoRepository;
 import com.estaciojava.Armatech.repository.ProdutoRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
+
+import java.util.Optional;
 
 @Service
-public class LancamentoService extends CrudServiceImpl<Lancamento , Lancamento , Lancamento, String> {
+public class LancamentoService extends CrudServiceImpl<Lancamento, Lancamento, Lancamento, String> {
 
     private final ProdutoRepository produtoRepository;
 
@@ -26,25 +29,28 @@ public class LancamentoService extends CrudServiceImpl<Lancamento , Lancamento ,
     @Override
     public Lancamento saveAfter(Lancamento entity) {
         // buscar o produto com idproduto
-        Produto produto = entity.getProduto();
 
-        if (produto.isEmpty) {
+
+        Optional<Produto> produtoOpicional = produtoRepository.findById(entity.getProduto().getId());
+        Produto produto = produtoOpicional.get();
+
+        if (ObjectUtils.isEmpty(produto)) {
             throw new IllegalArgumentException("Produto não encontrado.");
         }
         // verificar o tipo do lancamento
 
-        if(entity.getTipo() == Lancamento.TipoLancamento.ENTRADA) {
-            produto(produto + entity.getQuantidade());
-        }else if(entity.getTipo() == Lancamento.TipoLancamento.SAIDA) {
+        if (entity.getTipo() == Lancamento.TipoLancamento.ENTRADA) {
+            produto.setQuantidade(produto.getQuantidade() + entity.getQuantidade());
+        } else if (entity.getTipo() == Lancamento.TipoLancamento.SAIDA) {
             if (produto.getQuantidade() < entity.getQuantidade()) {
                 throw new IllegalArgumentException("Estoque insuficiente para realizar a saída.");
             }
-            produto(produto - entity.getQuantidade());
+            produto.setQuantidade(produto.getQuantidade() - entity.getQuantidade());
         }
 
         // Salva o produto atualizado no repositório
         produtoRepository.save(produto);
 
-        return super.save(entity);
+        return entity;
     }
 }

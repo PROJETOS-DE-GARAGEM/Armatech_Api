@@ -3,6 +3,9 @@ package com.estaciojava.Armatech.model;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
+import lombok.experimental.FieldNameConstants;
+
 import java.sql.Timestamp;
 
 @Getter
@@ -44,6 +47,7 @@ public class Lancamento {
     @JoinColumn(name = "idProduto", referencedColumnName = "id") // Explicita que a FK é 'idProduto'
     @ManyToOne // Estabelece que vários lançamentos podem referenciar um único produto
     private Produto produto;
+
 
     /* Só para visualizar melhor como está no banco:
 
