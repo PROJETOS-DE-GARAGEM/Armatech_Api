@@ -2,23 +2,55 @@ package com.estaciojava.Armatech.service;
 
 
 import com.estaciojava.Armatech.classes.CrudServiceImpl;
+import com.estaciojava.Armatech.filter.ExemploFilter;
+import com.estaciojava.Armatech.filter.LancamentoFilter;
+import com.estaciojava.Armatech.model.Exemplo;
 import com.estaciojava.Armatech.model.Lancamento;
 import com.estaciojava.Armatech.model.Produto;
 import com.estaciojava.Armatech.repository.LancamentoRepository;
 import com.estaciojava.Armatech.repository.ProdutoRepository;
+import com.estaciojava.Armatech.specification.LancamentoSpecification;
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
-public class LancamentoService extends CrudServiceImpl<Lancamento, Lancamento, Lancamento, String> {
+public class LancamentoService extends CrudServiceImpl<Lancamento, Lancamento, LancamentoFilter, String> {
 
     private final ProdutoRepository produtoRepository;
-
-    public LancamentoService(LancamentoRepository lancamentoRepository, ProdutoRepository produtoRepository) {
+    private final JpaSpecificationExecutor<Lancamento> repositorySpecification;
+    private final LancamentoSpecification specificationClass;
+    public LancamentoService(
+            LancamentoRepository lancamentoRepository,
+            ProdutoRepository produtoRepository,
+            JpaSpecificationExecutor<Lancamento> specificRepository,
+            LancamentoSpecification specification
+            ) {
         super(lancamentoRepository);
         this.produtoRepository = produtoRepository;
+        this.repositorySpecification = specificRepository;
+        this.specificationClass = specification;
+
+    }
+
+    @Override
+    public List<Lancamento> findAll(LancamentoFilter filter) {
+        try {
+            List<Lancamento> entities;
+            if(ObjectUtils.isEmpty(filter)){
+                entities = (List<Lancamento>) repository.findAll();
+            }else {
+                Specification<Lancamento> specification = specificationClass.filtrarPorCampos(filter);
+                entities =  repositorySpecification.findAll(specification);
+            }
+            return this.findAllFormat(entities);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.estaciojava.Armatech.controller;
 
 import com.estaciojava.Armatech.classes.CrudController;
+import com.estaciojava.Armatech.filter.LancamentoFilter;
 import com.estaciojava.Armatech.model.Lancamento;
 import com.estaciojava.Armatech.service.LancamentoService;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/lancamento")
-public class LancamentoController extends CrudController<Lancamento,Lancamento ,Lancamento, String> {
+public class LancamentoController extends CrudController<Lancamento,Lancamento , LancamentoFilter, String> {
 
     public LancamentoController(LancamentoService service) {
         super(service);
