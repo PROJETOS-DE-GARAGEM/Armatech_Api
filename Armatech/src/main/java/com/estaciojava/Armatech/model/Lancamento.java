@@ -35,7 +35,7 @@ public class Lancamento {
     }
 
     // Propriedade para armazenar o tipo do lançamento
-    @Enumerated(EnumType.STRING) // Armazena como String no banco
+    @Enumerated(EnumType.ORDINAL) // Armazena como String no banco
     private TipoLancamento tipo;
 
     private double quantidade;
