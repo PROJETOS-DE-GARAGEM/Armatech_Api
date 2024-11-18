@@ -45,7 +45,7 @@ public class AuthController {
         repository.save(usuario.get());
 
         //Envio do link de recuperação por e-mail
-        String resetLink = "http://seu-frontend.com/reset-password?token=" + resetToken;
+        String resetLink = "armatech//reset-password?token=" + resetToken;
         emailService.sendEmail(email, "Recuperação de Senha", "Clique no link para redefinir a sua senha:  " + resetLink);
 
         return ResponseEntity.ok("Link de recuperação enviado para o email");
