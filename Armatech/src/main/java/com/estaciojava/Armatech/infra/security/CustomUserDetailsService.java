@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 
 //Busca o email no banco de dados
-//Se o usuario for encontrado, o Srping comprar a senha inserida com a senha armazenada.
+//Se o usuario for encontrado, o Srping compara a senha inserida com a senha armazenada.
 //Se as senhas coincidirem, o usuario passa pela autenticação e pode acessar a aplicação
 @Component
 public class CustomUserDetailsService implements UserDetailsService {
