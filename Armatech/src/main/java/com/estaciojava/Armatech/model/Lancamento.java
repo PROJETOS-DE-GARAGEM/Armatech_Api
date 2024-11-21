@@ -35,12 +35,15 @@ public class Lancamento {
     }
 
     // Propriedade para armazenar o tipo do lançamento
-    @Enumerated(EnumType.STRING) // Armazena como String no banco
+    @Enumerated(EnumType.ORDINAL) // Armazena como String no banco
     private TipoLancamento tipo;
 
     private double quantidade;
 
+    @Column(name = "data_entrada") // Nome exato da coluna no banco
     private Timestamp dataEntrada;
+
+    @Column(name = "data_saida") // Nome exato da coluna no banco
     private Timestamp dataSaida;
 
     // Referência à entidade Produto OBS: Preciso de Produtos feito para que tenha essa relação
